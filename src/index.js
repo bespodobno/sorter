@@ -1,5 +1,4 @@
-class Sorter {
-  
+class Sorter {  
   constructor() {
     // your implementation
      this.arr = new Array();//[];
@@ -12,17 +11,17 @@ class Sorter {
 
   at(index) {
     // your implementation
-    arr[index];
+   return this.arr[index];
   }
 
   get length() {
     // your implementation
-    return  arr.length;
+    return  this.arr.length;
   }
 
   toArray() {
     // your implementation
-    arr;
+   return this.arr;
   }
 //takes indices of already added elements and sorts *only* these elements
   sort(indices) {
