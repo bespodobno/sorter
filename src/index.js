@@ -1,63 +1,63 @@
-class Sorter {  
-  constructor() {
-    // your implementation
-     this.arr = new Array();//[];
-  }
+class Sorter {
+    constructor() {
+        this.arr = [];
+        this.compareFunction = null;
+    }
 
-  add(element) {
-    // your implementation
-    this.arr.push(element);
-  }
+    add(element) {
+        this.arr.push(element);
+    }
 
-  at(index) {
-    // your implementation
-   return this.arr[index];
-  }
+    at(index) {
+        return this.arr[index];
+    }
 
-  get length() {
-    // your implementation
-    return  this.arr.length;
-  }
+    get length() {
+        return this.arr.length;
+    }
 
-  toArray() {
-    // your implementation
-   return this.arr;
-  }
+    toArray() {
+        return this.arr;
+    }
+
 //takes indices of already added elements and sorts *only* these elements
-  sort(indices) {
-    // your implementation
-    
-    var n = indices.length;
-    for (var i = 0; i < n-1; i++)
-     { 
-       var min = indices[i];
-       for (var j = i+1; j < n; j++)
-        {
-           if (arr[indices[j]] < arr[min]) min = indices[j]; 
-          } 
-       var t = arr[min]; arr[min] = arr[indices[ i]]; arr[indices[ i] ] = t;
-     }        
+    sort(indices) {
+        let arrTemp = [];
 
-    //     for (var i = 0, endI = arr.length - 1; i < endI; i++) {
-    //     for (var j = 0, endJ = endI - i; j < endJ; j++) {
+        this.customSort(indices);
 
-    //         if (arr[j] > arr[j + 1]) {
-    //             var swap = arr[j];
+        for (let i = 0; i < indices.length; i++) {
+            arrTemp.push(this.arr[indices[i]]);
+        }
+        if (this.compareFunction) {
+            arrTemp.sort(this.compareFunction);
+        }
+        else {
+            this.customSort(arrTemp);
+        }
 
-    //             arr[j] = arr[j + 1];
-    //             arr[j + 1] = swap;
-    //         }
-    //     }
-    // }
-    
+        for (let i = 0; i < indices.length; i++) {
+            this.arr[indices[i]] = arrTemp[i];
+        }
+    }
 
-  }
+    customSort(arr) {
+        for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+            for (let j = 0, endJ = endI - i; j < endJ; j++) {
 
-  setComparator(compareFunction) {
-    // your implementation
-    
-   arr.sort(compareFunction);
-  }
+                if (arr[j] > arr[j + 1]) {
+                    let swap = arr[j];
+
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = swap;
+                }
+            }
+        }
+    }
+
+    setComparator(compareFunction) {
+        this.compareFunction = compareFunction;
+    }
 }
 
 module.exports = Sorter;
